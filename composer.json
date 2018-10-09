@@ -1,0 +1,21 @@
+{
+  "name": "fgits/carbon-german-holidays",
+  "description": "Carbon extension with support for German Holidays",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Fabian Golle",
+      "email": "fabian@golle-it.de"
+    }
+  ],
+  "require": {
+    "nesbot/carbon": "^2.0",
+    "ext-calendar": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Fgits\\CarbonGermanHolidays\\": "src/Fgits/CarbonGermanHolidays"
+    }
+  }
+}
