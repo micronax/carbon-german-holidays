@@ -134,29 +134,29 @@ class CarbonGermanHolidays extends Carbon
     public static function getHolidays($year, $states = self::ALL_STATES)
     {
         $holidays     = array();
-        $ostersonntag = self::getEasterSunday($year)->unix();
+        $easterSunday = self::getEasterSunday($year)->unix();
 
         if ( ! is_array($states)) {
             $states = array($states);
         }
 
-        $busstag = mktime(0, 0, 0, 11, 22 - ($year - 1 + $year / 4) % 7, $year);
+        $penanceDay = mktime(0, 0, 0, 11, 22 - ($year - 1 + $year / 4) % 7, $year);
 
 
         // For all states
         $holidays['Neujahr']                   = mktime(0, 0, 0, 1, 1, $year);
         $holidays['Tag der Arbeit']            = mktime(0, 0, 0, 5, 1, $year);
-        $holidays['Karfreitag']                = strtotime('-2 days', $ostersonntag);
-        $holidays['Ostermontag']               = strtotime('+1 day', $ostersonntag);
-        $holidays['Christi Himmelfahrt']       = strtotime('+39 days', $ostersonntag);
-        $holidays['Pfingstmontag']             = strtotime('+50 days', $ostersonntag);
+        $holidays['Karfreitag']                = strtotime('-2 days', $easterSunday);
+        $holidays['Ostermontag']               = strtotime('+1 day', $easterSunday);
+        $holidays['Christi Himmelfahrt']       = strtotime('+39 days', $easterSunday);
+        $holidays['Pfingstmontag']             = strtotime('+50 days', $easterSunday);
         $holidays['Tag der Deutschen Einheit'] = mktime(0, 0, 0, 10, 3, $year);
         $holidays['1. Weihnachtstag']          = mktime(0, 0, 0, 12, 25, $year);
         $holidays['2. Weihnachtstag']          = mktime(0, 0, 0, 12, 26, $year);
 
         if (in_array(self::BRANDENBURG, $states)) {
-            $holidays['Ostersonntag']   = $ostersonntag;
-            $holidays['Pfingstsonntag'] = strtotime('+49 days', $ostersonntag);
+            $holidays['Ostersonntag']   = $easterSunday;
+            $holidays['Pfingstsonntag'] = strtotime('+49 days', $easterSunday);
         }
 
 
@@ -165,11 +165,11 @@ class CarbonGermanHolidays extends Carbon
         }
 
         if (in_array(self::SACHSEN, $states)) {
-            $holidays['Buß- und Bettag'] = $busstag;
+            $holidays['Buß- und Bettag'] = $penanceDay;
         }
 
         if (array_intersect(array(self::BADEN_WUERTTEMBERG, self::BAYERN, self::HESSEN, self::NORDRHEIN_WESTFALEN, self::RHEINLAND_PFALZ, self::SAARLAND), $states)) {
-            $holidays['Fronleichnam'] = strtotime('+60 days', $ostersonntag);
+            $holidays['Fronleichnam'] = strtotime('+60 days', $easterSunday);
         }
 
         if (array_intersect(array(self::BAYERN, self::SAARLAND), $states)) {
@@ -185,10 +185,10 @@ class CarbonGermanHolidays extends Carbon
         }
 
         if (in_array(self::CHRISTMAS_DAYS, $states)) {
-            $holidays['1. Advent']   = strtotime('+11 days', $busstag);
-            $holidays['2. Advent']   = strtotime('+18 days', $busstag);
-            $holidays['3. Advent']   = strtotime('+25 days', $busstag);
-            $holidays['4. Advent']   = strtotime('+32 days', $busstag);
+            $holidays['1. Advent']   = strtotime('+11 days', $penanceDay);
+            $holidays['2. Advent']   = strtotime('+18 days', $penanceDay);
+            $holidays['3. Advent']   = strtotime('+25 days', $penanceDay);
+            $holidays['4. Advent']   = strtotime('+32 days', $penanceDay);
             $holidays['Nikolaus']    = mktime(0, 0, 0, 12, 6, $year);
             $holidays['Heiligabend'] = mktime(0, 0, 0, 12, 24, $year);
             $holidays['Silvester']   = mktime(0, 0, 0, 12, 31, $year);
@@ -200,26 +200,26 @@ class CarbonGermanHolidays extends Carbon
         }
 
         if (in_array(self::SPECIAL_DAYS_2, $states)) {
-            $holidays['Weiberfastnacht'] = strtotime('-52 days', $ostersonntag);
-            $holidays['Rosenmontag']     = strtotime('-48 days', $ostersonntag);
-            $holidays['Fastnacht']       = strtotime('-47 days', $ostersonntag);
-            $holidays['Aschermittwoch']  = strtotime('-46 days', $ostersonntag);
-            $holidays['Palmsonntag']     = strtotime('-7 days', $ostersonntag);
-            $holidays['Gründonnerstag']  = strtotime('-3 days', $ostersonntag);
+            $holidays['Weiberfastnacht'] = strtotime('-52 days', $easterSunday);
+            $holidays['Rosenmontag']     = strtotime('-48 days', $easterSunday);
+            $holidays['Fastnacht']       = strtotime('-47 days', $easterSunday);
+            $holidays['Aschermittwoch']  = strtotime('-46 days', $easterSunday);
+            $holidays['Palmsonntag']     = strtotime('-7 days', $easterSunday);
+            $holidays['Gründonnerstag']  = strtotime('-3 days', $easterSunday);
         }
 
         if (in_array(self::SPECIAL_DAYS_3, $states)) {
             $holidays['Martinstag']                = mktime(0, 0, 0, 11, 11, $year);
             $holidays['Internationaler Kindertag'] = mktime(0, 0, 0, 6, 1, $year);
             $holidays['Weltkindertag']             = mktime(0, 0, 0, 9, 20, $year);
-            $holidays['Weißer Sonntag']            = strtotime('+7 days', $ostersonntag);
+            $holidays['Weißer Sonntag']            = strtotime('+7 days', $easterSunday);
             $holidays['Internationaler Frauentag'] = mktime(0, 0, 0, 3, 8, $year);
             //$holidays['Walpurgisnacht']            = mktime(0, 0, 0, 4, 30, $year); // WTF
-            $holidays['Karsamstag']                = strtotime('-1 day', $ostersonntag);
-            $holidays['Allerseelen']               = mktime(0, 0, 0, 11, 2, $year);
-            $holidays['Erntedankfest']             = mktime(0, 0, 0, 10, 7 - ($year + 5 + $year / 4) % 7, $year);
-            $holidays['Volkstrauertag']            = strtotime('-3 days', $busstag);
-            $holidays['Totensonntag']              = strtotime('+4 days', $busstag);
+            $holidays['Karsamstag']     = strtotime('-1 day', $easterSunday);
+            $holidays['Allerseelen']    = mktime(0, 0, 0, 11, 2, $year);
+            $holidays['Erntedankfest']  = mktime(0, 0, 0, 10, 7 - ($year + 5 + $year / 4) % 7, $year);
+            $holidays['Volkstrauertag'] = strtotime('-3 days', $penanceDay);
+            $holidays['Totensonntag']   = strtotime('+4 days', $penanceDay);
         }
 
         if (in_array(self::SPECIAL_DAYS_4, $states)) {
