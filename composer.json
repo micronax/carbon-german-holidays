@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-    "nesbot/carbon": "^2.0",
+    "nesbot/carbon": "^1.0",
     "ext-calendar": "*"
   },
   "autoload": {

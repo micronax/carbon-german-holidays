@@ -91,7 +91,7 @@ class CarbonGermanHolidays extends Carbon
     {
         $holidays = self::getHolidays($this->year, $states);
 
-        return in_array($this->startOfDay()->toDateTime(), $holidays, true);
+        return in_array($this->startOfDay(), $holidays, true);
     }
 
     /**
@@ -105,7 +105,7 @@ class CarbonGermanHolidays extends Carbon
     {
         $holidays = self::getHolidays($this->year, $states);
 
-        return array_keys($holidays, $this->startOfDay()->toDateTime());
+        return array_keys($holidays, $this->startOfDay());
     }
 
 
@@ -134,7 +134,7 @@ class CarbonGermanHolidays extends Carbon
     public static function getHolidays($year, $states = self::ALL_STATES)
     {
         $holidays     = array();
-        $easterSunday = self::getEasterSunday($year)->unix();
+        $easterSunday = self::getEasterSunday($year)->format('u');
 
         if ( ! is_array($states)) {
             $states = array($states);
