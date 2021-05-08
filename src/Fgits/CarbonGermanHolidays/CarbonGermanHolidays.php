@@ -91,7 +91,7 @@ class CarbonGermanHolidays extends Carbon
     {
         $holidays = self::getHolidays($this->year, $states);
 
-        return in_array($this->startOfDay(), $holidays, true);
+        return in_array($this->startOfDay(), $holidays, false);
     }
 
     /**
