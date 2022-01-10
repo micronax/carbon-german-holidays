@@ -10,7 +10,7 @@ Install the library using composer:
 
 General usage by example:
 
-```
+```php
 <?php
 require_once 'vendor/autoload.php';
 
@@ -38,7 +38,7 @@ echo $instance2->getGermanHolidaysForDay(CarbonGermanHolidays::ALL_STATES_ALL_DA
 
 Getting holidays for specific German states:
 
-```
+```php
 <?php
 // import class etc, see above.
 
@@ -56,7 +56,7 @@ Support for some other special days:
 
 In Germany, eg. the 24th of December is not a public holiday. But in my opinion its a special day, you may want to check for. For this case, the class offers some additions to the German states: 
 
-```
+```php
 <?php
 // import class etc, see above.
 
