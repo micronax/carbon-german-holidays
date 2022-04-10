@@ -134,7 +134,7 @@ class CarbonGermanHolidays extends Carbon
     public static function getHolidays($year, $states = self::ALL_STATES)
     {
         $holidays     = array();
-        $easterSunday = self::getEasterSunday($year)->format('u');
+        $easterSunday = self::getEasterSunday($year)->getTimeStamp();
 
         if ( ! is_array($states)) {
             $states = array($states);
