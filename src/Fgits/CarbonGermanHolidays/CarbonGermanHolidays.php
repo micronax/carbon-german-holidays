@@ -118,7 +118,7 @@ class CarbonGermanHolidays extends Carbon
      */
     public static function getEasterSunday($year)
     {
-        $easter = self::createFromDate($year, 03, 21);
+        $easter = self::createFromDate($year, 03, 21)->startOfDay();
 
         return $easter->addDays(easter_days($year));
     }
