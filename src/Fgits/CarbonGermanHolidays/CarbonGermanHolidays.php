@@ -179,7 +179,7 @@ class CarbonGermanHolidays extends Carbon
             $holidays['Mariä Himmelfahrt'] = mktime(0, 0, 0, 8, 15, $year);
         }
 
-        if (array_intersect(array(self::BRANDENBURG, self::MECKLENBURG_VORPOMMERN, self::SACHSEN, self::SACHSEN_ANHALT, self::THUERINGEN), $states)) {
+        if (array_intersect(array(self::BRANDENBURG, self::MECKLENBURG_VORPOMMERN, self::SACHSEN, self::SACHSEN_ANHALT, self::THUERINGEN, self::NIEDERSACHSEN, self::HAMBURG, self::SCHLESWIG_HOLSTEIN, self::BREMEN), $states)) {
             $holidays['Reformationstag'] = mktime(0, 0, 0, 10, 31, $year);
         }
 
