@@ -10,6 +10,7 @@
     }
   ],
   "require": {
+    "php": "7.4.*||8.*",
     "nesbot/carbon": "^1.0||^2.0",
     "ext-calendar": "*"
   },

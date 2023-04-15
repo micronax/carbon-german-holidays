@@ -36,7 +36,7 @@ class CarbonGermanHolidays extends Carbon
     const SPECIAL_DAYS_4 = 'special-days-4';
 
     const ALL_STATES
-        = array(
+        = [
             self::BADEN_WUERTTEMBERG,
             self::BAYERN,
             self::BERLIN,
@@ -53,10 +53,10 @@ class CarbonGermanHolidays extends Carbon
             self::SACHSEN_ANHALT,
             self::SCHLESWIG_HOLSTEIN,
             self::THUERINGEN,
-        );
+        ];
 
     const ALL_STATES_ALL_DAYS
-        = array(
+        = [
             self::BADEN_WUERTTEMBERG,
             self::BAYERN,
             self::BERLIN,
@@ -78,7 +78,7 @@ class CarbonGermanHolidays extends Carbon
             self::SPECIAL_DAYS_2,
             self::SPECIAL_DAYS_3,
             self::SPECIAL_DAYS_4,
-        );
+        ];
 
     /**
      * Returns boolean if the current Carbon instance is a German holiday
@@ -133,14 +133,14 @@ class CarbonGermanHolidays extends Carbon
      */
     public static function getHolidays($year, $states = self::ALL_STATES)
     {
-        $holidays     = array();
+        $holidays     = [];
         $easterSunday = self::getEasterSunday($year)->getTimeStamp();
 
         if ( ! is_array($states)) {
-            $states = array($states);
+            $states = [$states];
         }
 
-        $penanceDay = mktime(0, 0, 0, 11, 22 - ($year - 1 + ((int) ((int) ($year / 4)) % 7)), $year);
+        $penanceDay = mktime(0, 0, 0, 11, 22 - ($year - 1 + ((int)((int)($year / 4)) % 7)), $year);
 
 
         // For all states
@@ -163,7 +163,7 @@ class CarbonGermanHolidays extends Carbon
             $holidays['Pfingstsonntag'] = strtotime('+49 days', $easterSunday);
         }
 
-        if (array_intersect(array(self::BADEN_WUERTTEMBERG, self::BAYERN, self::SACHSEN_ANHALT), $states)) {
+        if (array_intersect([self::BADEN_WUERTTEMBERG, self::BAYERN, self::SACHSEN_ANHALT], $states)) {
             $holidays['Heilige Drei Könige'] = mktime(0, 0, 0, 1, 6, $year);
         }
 
@@ -171,19 +171,19 @@ class CarbonGermanHolidays extends Carbon
             $holidays['Buß- und Bettag'] = $penanceDay;
         }
 
-        if (array_intersect(array(self::BADEN_WUERTTEMBERG, self::BAYERN, self::HESSEN, self::NORDRHEIN_WESTFALEN, self::RHEINLAND_PFALZ, self::SAARLAND), $states)) {
+        if (array_intersect([self::BADEN_WUERTTEMBERG, self::BAYERN, self::HESSEN, self::NORDRHEIN_WESTFALEN, self::RHEINLAND_PFALZ, self::SAARLAND], $states)) {
             $holidays['Fronleichnam'] = strtotime('+60 days', $easterSunday);
         }
 
-        if (array_intersect(array(self::BAYERN, self::SAARLAND), $states)) {
+        if (array_intersect([self::BAYERN, self::SAARLAND], $states)) {
             $holidays['Mariä Himmelfahrt'] = mktime(0, 0, 0, 8, 15, $year);
         }
 
-        if (array_intersect(array(self::BRANDENBURG, self::MECKLENBURG_VORPOMMERN, self::SACHSEN, self::SACHSEN_ANHALT, self::THUERINGEN, self::NIEDERSACHSEN, self::HAMBURG, self::SCHLESWIG_HOLSTEIN, self::BREMEN), $states)) {
+        if (array_intersect([self::BRANDENBURG, self::MECKLENBURG_VORPOMMERN, self::SACHSEN, self::SACHSEN_ANHALT, self::THUERINGEN, self::NIEDERSACHSEN, self::HAMBURG, self::SCHLESWIG_HOLSTEIN, self::BREMEN], $states)) {
             $holidays['Reformationstag'] = mktime(0, 0, 0, 10, 31, $year);
         }
 
-        if (array_intersect(array(self::BADEN_WUERTTEMBERG, self::BAYERN, self::NORDRHEIN_WESTFALEN, self::RHEINLAND_PFALZ, self::SAARLAND), $states)) {
+        if (array_intersect([self::BADEN_WUERTTEMBERG, self::BAYERN, self::NORDRHEIN_WESTFALEN, self::RHEINLAND_PFALZ, self::SAARLAND], $states)) {
             $holidays['Allerheiligen'] = mktime(0, 0, 0, 11, 1, $year);
         }
 
@@ -230,11 +230,6 @@ class CarbonGermanHolidays extends Carbon
             $holidays['Winterzeit (-1h)'] = mktime(0, 0, 0, 10, 31 - ($year + 1 + $year / 4) % 7, $year);
         }
 
-        return array_map('self::unix2Date', $holidays);
-    }
-
-    private static function unix2Date($unixTimestamp)
-    {
-        return (new \DateTime())->setTimestamp($unixTimestamp);
+        return array_map(static fn($u) => (new \DateTime())->setTimestamp($u), $holidays);
     }
 }
