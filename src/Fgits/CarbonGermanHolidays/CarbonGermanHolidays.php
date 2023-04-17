@@ -140,8 +140,7 @@ class CarbonGermanHolidays extends Carbon
             $states = [$states];
         }
 
-        $penanceDay = date('Y-m-d', strtotime("-40 days", $easterSunday));
-
+        $penanceDay = strtotime("last Wednesday", mktime(0, 0, 0, 11, 23, $year));
 
         // For all states
         $holidays['Neujahr']                   = mktime(0, 0, 0, 1, 1, $year);
