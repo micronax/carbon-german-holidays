@@ -153,10 +153,10 @@ class CarbonGermanHolidays extends Carbon
         $holidays['1. Weihnachtstag']          = mktime(0, 0, 0, 12, 25, $year);
         $holidays['2. Weihnachtstag']          = mktime(0, 0, 0, 12, 26, $year);
 
-        if (in_array(self::BERLIN, $states)) {
+        if (array_intersect([self::BERLIN, self::MECKLENBURG_VORPOMMERN], $states)) {
             $holidays['Internationaler Frauentag'] = mktime(0, 0, 0, 3, 8, $year);
         }
-
+        
         if (in_array(self::BRANDENBURG, $states)) {
             $holidays['Ostersonntag']   = $easterSunday;
             $holidays['Pfingstsonntag'] = strtotime('+49 days', $easterSunday);
