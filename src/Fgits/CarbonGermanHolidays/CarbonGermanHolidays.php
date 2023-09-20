@@ -156,7 +156,7 @@ class CarbonGermanHolidays extends Carbon
         if (array_intersect([self::BERLIN, self::MECKLENBURG_VORPOMMERN], $states)) {
             $holidays['Internationaler Frauentag'] = mktime(0, 0, 0, 3, 8, $year);
         }
-        
+
         if (in_array(self::BRANDENBURG, $states)) {
             $holidays['Ostersonntag']   = $easterSunday;
             $holidays['Pfingstsonntag'] = strtotime('+49 days', $easterSunday);
@@ -219,14 +219,14 @@ class CarbonGermanHolidays extends Carbon
             //$holidays['Walpurgisnacht']            = mktime(0, 0, 0, 4, 30, $year); // WTF
             $holidays['Karsamstag']     = strtotime('-1 day', $easterSunday);
             $holidays['Allerseelen']    = mktime(0, 0, 0, 11, 2, $year);
-            $holidays['Erntedankfest']  = mktime(0, 0, 0, 10, 7 - ($year + 5 + $year / 4) % 7, $year);
+            $holidays['Erntedankfest']  = mktime(0, 0, 0, 10, 7 - intval($year + 5 + $year / 4) % 7, $year);
             $holidays['Volkstrauertag'] = strtotime('-3 days', $penanceDay);
             $holidays['Totensonntag']   = strtotime('+4 days', $penanceDay);
         }
 
         if (in_array(self::SPECIAL_DAYS_4, $states)) {
-            $holidays['Sommerzeit (+1h)'] = mktime(0, 0, 0, 3, 31 - ($year + 4 + $year / 4) % 7, $year);
-            $holidays['Winterzeit (-1h)'] = mktime(0, 0, 0, 10, 31 - ($year + 1 + $year / 4) % 7, $year);
+            $holidays['Sommerzeit (+1h)'] = mktime(0, 0, 0, 3, 31 - intval($year + 4 + $year / 4) % 7, $year);
+            $holidays['Winterzeit (-1h)'] = mktime(0, 0, 0, 10, 31 - intval($year + 1 + $year / 4) % 7, $year);
         }
 
         return array_map(static fn($u) => (new \DateTime())->setTimestamp($u), $holidays);
