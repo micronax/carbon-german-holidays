@@ -186,6 +186,13 @@ class CarbonGermanHolidays extends Carbon
             $holidays['Allerheiligen'] = mktime(0, 0, 0, 11, 1, $year);
         }
 
+        if (in_array(self::THUERINGEN, $states)) {
+            // Weltkindertag is since 2019 holiday in thueringen
+            if($year >= 2019) {
+                $holidays['Weltkindertag'] = mktime(0, 0, 0, 9, 20, $year);
+            }
+        }
+
         if (in_array(self::CHRISTMAS_DAYS, $states)) {
             $holidays['1. Advent']   = strtotime('+11 days', $penanceDay);
             $holidays['2. Advent']   = strtotime('+18 days', $penanceDay);
